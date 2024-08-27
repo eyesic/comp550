@@ -1,4 +1,4 @@
-# Max Array
+# Max in Array
 # ALG (A):
 ## Can return max(A) for simplicity
 def Alg(A):

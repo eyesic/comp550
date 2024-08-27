@@ -3,7 +3,7 @@
 # -> Alg should return 2, 5, there are cases where can return nothing
 # Goal: Return (i, j) s.t. i<j and A[i] + A[j] = t
 
-# Brute Force
+# Brute Force 0(n^2)
 
 def twoSum(self, nums: list[int], target: int) -> list[int]:
         for i in range(len(nums)):
@@ -12,7 +12,7 @@ def twoSum(self, nums: list[int], target: int) -> list[int]:
                     return [i, j]
         return []
 
-# Two Pointer
+# Two Pointer O(n)
 
 def twosSumPointer(A, t):
     left, right = 0, len(A) - 1
