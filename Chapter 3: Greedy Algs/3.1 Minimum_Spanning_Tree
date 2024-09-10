@@ -1,0 +1,76 @@
+Prims, Kruskals, Reverse-Delte
+
+Input: undir, connected G
+    edge weights
+    Ve: w(e) > 0
+
+
+Normally, a graph has a list of its neighbors 
+Still a linked-list but it has a neighbor v, then the weight w (v,w)
+
+Goal: Return the MST of G
+    V: V(G)
+    E(T) 
+
+Pseudo Code:
+
+# a cut is a subset of V. An edge crosses a cut if it has exactly one endpoint in the cut
+
+Alg(G): Prim's 
+    S = subset {1}, F = [ ]
+    for i = 1, ..., n - 1:
+        e = lightest edge crossing S
+        v = endpoint of e not in S
+        add v to s
+        add e to F 
+    return F
+
+Correctness: For contradiction, the set {1, 2} is not a subset of a MST.
+    We can improve the MST by replacing a weight
+
+General Property: V cut S, the lightest edge crossing S is in the MST which generally proves prim's algorithm 
+
+Running Time: n iterations * O(m) each iteration therefore, total RT is O(mn) = O(m(m+1)) = O(m^2)
+
+G is connected -> n-1 <= m 
+
+We can implement a set S using a binary array 
+    s = empty set -> S = [0] * n
+    add v to S -> S[u] = 1
+    remove v from S -> S[u] = 0
+
+
+Kruskal's algorithm
+- Keep picking the lightest edge but don't create a cycle
+
+Kruskal's Alg(G):
+    Sort E by increasing w(e)
+    F = []
+    for e in E:
+        if F + e is acyclic (can use DFS):
+            add e to F 
+    return F 
+
+Cut Property -> Kruskal's is correct
+
+RT: m iterations, once per edge. Check for acyclic we do DFS which is O(m + n).
+-> O(mlogm) + m * O(m+n) = O(m^2)
+
+
+
+Reverse Delete
+
+Cycle Property:
+    For every cycle C in G the heaviest edge in C is not in the MST
+
+ALG(G): opposite of kruskals 
+    sort E by decreasing weight
+    for e in E:
+        # e is in a cycle in G
+        if G - e is connected:
+            remove e from G
+    return G
+
+Cycle Property -> Reverse-Delete is correct
+
+RT: O(mlogm) + m * O(m+n) = O(m^2)
